@@ -14,8 +14,8 @@ class AccountPage extends BasePage{
     // In JavaScript, getters are special methods that allow you to access an object's properties like they were regular properties, 
     //but you can also execute code when they are accessed.
     //The advantage of using getter and setter is that we can use them as properties instead of functions.
-    get h1Heading() {return cy.get('#content h1')};
-    get h2Heading() {return cy.get('#content h2')};
+    get h1Heading() {return cy.get('.ant-list-footer > div')}
+    get h2Heading() {return cy.get('.ant-space-item')}
 
     open() {
         return super.open(ENDPOINT_PREFIX + routes.ACCOUNT_ENDPOINT)

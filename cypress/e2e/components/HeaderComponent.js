@@ -2,9 +2,9 @@ export default class HeaderComponent {
 
     get searchInput() { return cy.get('#search input[name="search"]'); }
     get searchBtn() { return cy.get('#search button'); }
-    get myAccountDropdown() { return cy.get('#top-links a[title="My Account"]'); }
+    get myAccountDropdown() { return cy.get('.ant-row-space-between > :nth-child(2) > .ant-row > :nth-child(3)'); } //need to change it to click on myprofile icon 
     get shoppingCart() { return cy.get('#top-links a[title="Shopping Cart"]'); }
-    get logoutLink() { return cy.get('#top-links a').contains('Logout'); }
+    get logoutLink() { return cy.get('.ant-list-footer > div').contains('Log Out'); } //change this to click on logout button 
     get wishListMenu() { return cy.get('#top-links #wishlist-total'); }
 
     searchProduct(product) {

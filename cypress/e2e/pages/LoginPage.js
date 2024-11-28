@@ -5,10 +5,11 @@ import { ENDPOINT_PREFIX } from "../config/constants";
 class LoginPage extends BasePage{
 
     get continueBtn() { return cy.get('a').contains('Continue'); }
-    get loginInput() { return cy.get('#input-email'); }
-    get passwordInput() { return cy.get('#input-password'); }
-    get loginBtn() { return cy.get("input[value='Login']"); }
-    get alertMsg() { return cy.get('#account-login .alert'); }
+    get loginInput() { return cy.get('input[name="email"]'); }
+    get passwordInput() { return cy.get('input[name="password"]'); }
+    get loginBtn() { return cy.get('button[type="submit"]'); }
+    get alertMsg() { return cy.get('.ant-notification-notice-message'); }
+    get googleSign(){ return cy.get(':nth-child(5) > .ant-row > .ant-col > .button-create > .ant-btn')}
 
     open() {
         //cy.visit('?route=account/login');   //Prefixes the baseUrl
@@ -27,6 +28,7 @@ class LoginPage extends BasePage{
         this.passwordInput.type(password)
         this.loginBtn.click()
     }
+
 
 }
 

@@ -1,6 +1,6 @@
 module.exports = {
     REGISTRATION_ENDPOINT : 'account/register',
-    LOGIN_ENDPOINT : 'account/login',
+    LOGIN_ENDPOINT : 'login', //made changes in this
     ACCOUNT_ENDPOINT : 'account/account',
     PRODUCT_SEARCH_ENDPOINT : 'product/search',
     PRODUCT_DETAILS_ENDPOINT : 'product/product&product_id=',
