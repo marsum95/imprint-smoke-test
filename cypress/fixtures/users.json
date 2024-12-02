@@ -6,5 +6,15 @@
     "invalidUser": {
       "email": "invalid@test.com",
       "password": "invalidpassword"
+    },
+    "newUser":{
+      "email":"arsalanmehmood+1221@folio3.com",
+      "password":"Admin@123"
+    },
+    "userInfo":{
+      "displayname": "testing sigma boi",
+      "username": "efgh",
+      "aboutme": "abcd"
     }
+    
 }

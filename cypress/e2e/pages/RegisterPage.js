@@ -5,18 +5,22 @@ import { ENDPOINT_PREFIX } from "../config/constants";
 class RegisterPage extends BasePage{
 
 
-    get firstnameInput() { return cy.get('#input-firstname'); }
-    get lastnameInput() { return cy.get('#input-lastname'); }
-    get emailInput() { return cy.get('#input-email'); }
-    get telephoneInput() { return cy.get('#input-telephone'); }
-    get passwordInput() { return cy.get('#input-password'); }
-    get passwordConfirmInput() { return cy.get('#input-confirm'); }
+   // get firstnameInput() { return cy.get('#email') }
+  //  get lastnameInput() { return cy.get('#year') }
+    get emailInput() { return cy.get('input[placeholder="Enter email address or phone number"]') } // getting email from the form 
+    get yearValue() { return cy.get('#year')}
+    get monthValue() { return cy.get('#month')}
+    get dayValue() { return cy.get('#day')}
+   // get telephoneInput() { return cy.get('#input-telephone'); }
+    get passwordInput() { return cy.get('#password') } // getting password from 
+    get passwordConfirmInput() { return cy.get('#confirmPassword') }
     get policyCheckbox() { return cy.get('input[type="checkbox"][name="agree"]'); }
-    get continueBtn() { return cy.get('input[type="submit"][value="Continue"]'); }
+    get signupBtn() { return cy.get(':nth-child(5) > .button-create > .ant-btn') }
+    get ageVeriyPopup() { return cy.get('.ant-modal-footer > .ant-btn-primary')}
 
-    get inputValidationErr() { return (inputField) => cy.wrap(inputField).next('.text-danger'); }
+    get inputValidationErr() { return (inputField) => cy.wrap(inputField).get('.error-label'); }
 
-    get alertMsg() { return cy.get('#account-register .alert'); }
+    get alertMsg() { return cy.get('.ant-notification-notice-message'); }
 
     open() {
         return super.open(ENDPOINT_PREFIX + routes.REGISTRATION_ENDPOINT)
@@ -47,6 +51,20 @@ class RegisterPage extends BasePage{
         this.emailInput.type(email);
         return this;
     }
+    enterYear(year){
+        this.yearValue.select(year)
+        return this;
+    }
+
+    enterMonth(month){
+        this.monthValue.select(month)
+        return this;
+    }
+
+    enterDay(day){
+        this.dayValue.select(day)
+        return this;
+    }
 
     enterTelephone(telephone) {
         this.telephoneInput.type(telephone);
@@ -63,8 +81,13 @@ class RegisterPage extends BasePage{
         return this;
     }
 
+    ageVerification() {
+        this.ageVeriyPopup.click()
+    }
+
+
     submitRegistraion() {
-        this.continueBtn.click();
+        this.signupBtn.click();
     }
 
 

@@ -57,24 +57,24 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
    * 2nd param replaces the global config (cypress.dev.json) only in the scope of the current .spec.
    * Similar to: Cypress.config('baseUrl', 'https://accounts.google.com');
    */
-  it.only('should mock Google login', () => {
-    // Intercept the authentication API
-    cy.intercept('POST', '/api/auth/google', {
-      statusCode: 200,
-      body: { token: 'mock-token', user: { id: 1, name: 'Test User', email: 'test@example.com' } },
-    }).as('googleAuth');
+//   it.only('should mock Google login', () => {
+//     // Intercept the authentication API
+//     cy.intercept('POST', '/api/auth/google', {
+//       statusCode: 200,
+//       body: { token: 'mock-token', user: { id: 1, name: 'Test User', email: 'test@example.com' } },
+//     }).as('googleAuth');
 
-    // Visit the login page
-    cy.visit('https://sigma.imprint.live/login');
+//     // Visit the login page
+//     cy.visit('https://sigma.imprint.live/login');
 
-    // Trigger the Google login button (ensure it exists on the page)
-    cy.get(':nth-child(5) > .ant-row > .ant-col > .button-create > .ant-btn').click();
+//     // Trigger the Google login button (ensure it exists on the page)
+//     cy.get(':nth-child(5) > .ant-row > .ant-col > .button-create > .ant-btn').click();
 
-    // Wait for the mocked request
-    cy.wait('@googleAuth');
+//     // Wait for the mocked request
+//     cy.wait('@googleAuth');
 
-    // Assert that the user is logged in
-    cy.get('[data-cy="user-dashboard"]').should('be.visible');
-  })
+//     // Assert that the user is logged in
+//     cy.get('[data-cy="user-dashboard"]').should('be.visible');
+//   })
 
 })

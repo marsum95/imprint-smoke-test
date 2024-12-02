@@ -4,7 +4,7 @@ import { ENDPOINT_PREFIX } from "../config/constants";
 
 class LoginPage extends BasePage{
 
-    get continueBtn() { return cy.get('a').contains('Continue'); }
+    get continueBtn() { return cy.get('a').contains('Sign Up'); }
     get loginInput() { return cy.get('input[name="email"]'); }
     get passwordInput() { return cy.get('input[name="password"]'); }
     get loginBtn() { return cy.get('button[type="submit"]'); }
