@@ -29,6 +29,12 @@ class SigninFlowPage extends BasePage{
         return super.open(ENDPOINT_PREFIX + routes.LOGIN_ENDPOINT)
     }
 
+    openquiz() {
+        //cy.visit('?route=account/login');   //Prefixes the baseUrl
+        //cy.visit(Cypress.env('URL'));   //loads the URL from env object in cypress.config.js
+        return super.open('https://sigma.imprint.live/value-profile-quiz')
+    }
+
     openRegistrationPage() {
         this.open();
         //this.continueBtn.click();

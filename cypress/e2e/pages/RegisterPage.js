@@ -57,7 +57,7 @@ class RegisterPage extends BasePage{
     }
 
     enterMonth(month){
-        this.monthValue.select(month)
+        this.monthValue.select(month).should('have.value', '0')
         return this;
     }
 

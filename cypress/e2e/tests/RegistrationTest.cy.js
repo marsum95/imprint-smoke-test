@@ -9,20 +9,22 @@ describe("Account Registration", { tags: ['@Register', '@regression'] }, () => {
 
     beforeEach(() => {
         LoginPage.openRegistrationPage();
+        cy.fixture('users.json').as('users')
+
     });
 
     //Unique credentials are required for registration, so we use faker library to generate test data
-    it("should register the new user", ()=> {
+    it.only("should register the new user", ()=> {
 
-        let password = faker.internet.password();
+      //  let password = faker.internet.password();
 
         RegisterPage
           //  .enterfirstName(faker.person.firstName())
           //  .enterlastName(faker.person.lastName())
-            .enterEmail(faker.internet.email())
+            .enterEmail('arsalanmehmood+122111@folio3.com')
           //  .enterTelephone(faker.phone.number())
             .enterYear('1995')
-            .enterMonth('December')
+            .enterMonth('0')
             .enterDay('20')
             .enterPassword('Admin@123')
             .enterConfirmPassword('Admin@123')
@@ -35,7 +37,7 @@ describe("Account Registration", { tags: ['@Register', '@regression'] }, () => {
 
     })
 
-    it.only('should validate the error messages for missing input fields', {tags: '@smoke'}, () => {
+    it('should validate the error messages for missing input fields', {tags: '@smoke'}, () => {
        RegisterPage.submitRegistraion();
 
        //Instead of repeating the below code for querying and asserting each input field repeatedly

@@ -20,6 +20,8 @@ class AccountPage extends BasePage{
     get h2Heading() {return cy.get('.ant-space-item')}
     get signinWelcome() { return cy.get('.create-profile_title__3mn9Q')}
     get successLabel() { return cy.get('.success-label')}
+    get userNameOnQuiz() {return cy.get('h1')}
+    get profileName() { return cy.get('.flex-badge > h2')}
 
     open() {
         return super.open(ENDPOINT_PREFIX + routes.ACCOUNT_ENDPOINT)

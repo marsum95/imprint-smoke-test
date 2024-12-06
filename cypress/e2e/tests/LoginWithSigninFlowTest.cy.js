@@ -1,6 +1,6 @@
 import { validationMessages } from "../config/errorMessages";
 import AccountPage from "../pages/AccountPage";
-//import BasePage from "../pages/BasePage";
+import BasePage from "../pages/BasePage";
 import SigninFlowPage from "../pages/SigninFlowPage";
 
 import { faker } from '@faker-js/faker';
@@ -8,11 +8,11 @@ import { faker } from '@faker-js/faker';
 
 describe("Signup, Login and Quiz Flow", { tags: ['@Login', '@regression'] }, () => {
 
-    let basePage;
+   let basePage;
 
-    // before(() => {
-    //     basePage = new BasePage();
-    // })
+    before(() => {
+        basePage = new BasePage();
+    })
 
     beforeEach(() => {
 
@@ -46,6 +46,10 @@ describe("Signup, Login and Quiz Flow", { tags: ['@Login', '@regression'] }, () 
             
         SigninFlowPage
             .registerProfile()
+
+        AccountPage.userNameOnQuiz
+            .should('have.text', 'Welcome!')
+
         
     })
 
@@ -76,10 +80,13 @@ describe("Signup, Login and Quiz Flow", { tags: ['@Login', '@regression'] }, () 
 
     })
 
-    it.only("should not login and give validation error", { tags: '@smoke' }, function () {
+    it("Login and fill Quiz", { tags: '@smoke' }, function () {
 
         SigninFlowPage
             .loginWithUI(this.users.newUser.email, this.users.newUser.password)
+
+        SigninFlowPage.openquiz()
+        
 
 
     })
