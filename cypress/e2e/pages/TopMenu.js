@@ -26,19 +26,20 @@ class TopMenu extends BasePage{
     }
 
     newsButton() {
-        this.news.click();
+        this.news.click(); 
+        return this
     }
 
     entertainmentButton() {
-        this.entertainment.click();
+        this.entertainment.click(),
     }
 
     notificationButton() {
-        this.notification.click();
+        this.notification.click(),
     }
 
     messageButton() {
-        this.message.click();
+        this.message.click(),
     }
 
 
