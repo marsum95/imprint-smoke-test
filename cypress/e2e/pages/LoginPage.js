@@ -10,6 +10,7 @@ class LoginPage extends BasePage{
     get loginBtn() { return cy.get('button[type="submit"]'); }
     get alertMsg() { return cy.get('.ant-notification-notice-message'); }
     get googleSign(){ return cy.get(':nth-child(5) > .ant-row > .ant-col > .button-create > .ant-btn')}
+    
 
     open() {
         //cy.visit('?route=account/login');   //Prefixes the baseUrl

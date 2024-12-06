@@ -118,7 +118,7 @@ const notifications = [
 
     });
 
-    it.only('Should open side menu and validate enabled and disabled options',{tags: '@smoke'}, function () {
+    it('Should open side menu and validate enabled and disabled options',{tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.newUser.email, this.users.newUser.password)
@@ -157,7 +157,7 @@ const notifications = [
           cy.url().should('include', '/login'); // Ensure user is redirected to login page
 
     });
-      
+
     
 });
       
