@@ -10,6 +10,12 @@ class Timeline extends BasePage{
     get clickonPublishbtn() { return cy.get('button[text="Publish"]') }
     get postedContent() {return cy.get(':nth-child(1) > .edit-view-post-card > .post-card-content > .ant-row > :nth-child(1)')}
 
+    //Media Imprint
+    get clickonMedia() { return cy.get(':nth-child(3) > .button-create > .ant-btn > :nth-child(2)')}
+    get clickonUploadBtn() { return cy.get('.ant-upload > :nth-child(2) > div')}
+
+    get fileInput() { return cy.get('input[type="file"]')} // Adjust to the correct file input selector 
+
 
     open() {
         //cy.visit('?route=account/login');   //Prefixes the baseUrl
@@ -18,7 +24,6 @@ class Timeline extends BasePage{
     }
     
     textImprint(){
-
         cy.wait(1000)
         this.clickOnTimeline.click()
         // copied from another script
@@ -27,7 +32,7 @@ class Timeline extends BasePage{
         this.clickonEditor.click()
             .type(imprintText);
 
-        //this.clickonPublishbtn.click()
+            this.clickonPublishbtn.click();
 
     } 
 
@@ -45,12 +50,29 @@ class Timeline extends BasePage{
             .should('include.text',content)
         }
 
-    verifyTextImprint(){
+    verifyImprint(){
         this.getEditorContent().then(content => {
            // cy.wait(5000)
-            this.clickonPublishbtn.click();
+           
             this.verifyContent(content);  // Pass the actual content text to verifyContent
         });
+    }
+
+    mediaImprint(){
+        cy.wait(1000)
+        this.clickOnTimeline.click()
+        this.clickonMedia.click()
+
+       // this.clickonUploadBtn.click({force: true})
+
+        const filePath = 'media/Sofie.jpg'
+        this.fileInput.attachFile(filePath)
+
+        cy.log('File uploaded: ', filePath)
+
+        this.clickonPublishbtn.click();
+
+        
     }
     
 }

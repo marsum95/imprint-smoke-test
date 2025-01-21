@@ -8,6 +8,7 @@ import Timeline from "../pages/Timeline";
 
 
 describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () => {
+
     let basePage;
 
     before(() => {
@@ -25,7 +26,7 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
         cy.fixture('users.json').as('users')
     })
 
-     it("should login successfully and post a text Imprint", {tags: '@smoke'}, function () {
+    it("should login successfully and post a text Imprint", {tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
@@ -35,9 +36,23 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
 
         Timeline.textImprint()
 
-        Timeline.verifyTextImprint()
+        Timeline.verifyImprint()
 
-     })
+    })
+
+    it.only("should login successfully and post a Media Imprint", {tags: '@smoke'}, function () {
+
+        LoginPage
+            .loginWithUI(this.users.validUser.email, this.users.validUser.password)
+
+        AccountPage.h2Heading
+            .should('contains.text', 'Personal Tribe');
+
+        Timeline.mediaImprint()
+
+        Timeline.verifyImprint()
+
+    })
 
 
 })

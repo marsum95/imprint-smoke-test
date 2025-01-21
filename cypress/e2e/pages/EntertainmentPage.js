@@ -97,4 +97,3 @@ class EntertainmentPage extends BasePage{
 }
 
 export default new EntertainmentPage();
-
