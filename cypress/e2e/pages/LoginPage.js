@@ -20,7 +20,7 @@ class LoginPage extends BasePage{
 
     openRegistrationPage() {
         this.open();
-        this.continueBtn.click();
+        this.continueBtn.click()
     }
 
     loginWithUI(email, password) {

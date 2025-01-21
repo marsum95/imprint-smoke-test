@@ -8,4 +8,7 @@ module.exports = {
     PRODUCT_DETAILS_ENDPOINT : 'product/product&product_id=',
     CART_ENDPOINT : 'checkout/cart',
     WISHLIST_ENDPOINT : 'account/wishlist',
+    HOME: '',
+    NEWS:'news/general-news?categories=all',
+    ENTERTAINMENT: 'entertainment/good-deeds',
 }

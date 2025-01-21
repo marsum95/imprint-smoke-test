@@ -1,10 +1,13 @@
-import AccountPage from "../pages/AccountPage";
-import BasePage from "../pages/BasePage";
 import LoginPage from "../pages/LoginPage";
-import TopMenu from "../pages/TopMenu";
+import BasePage from "../pages/BasePage";
+import AccountPage from "../pages/AccountPage";
+import Timeline from "../pages/Timeline";
 
-describe("Top Menu Verification", { tags: ['@Login', '@regression'] }, () => {
 
+
+
+
+describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () => {
     let basePage;
 
     before(() => {
@@ -22,23 +25,19 @@ describe("Top Menu Verification", { tags: ['@Login', '@regression'] }, () => {
         cy.fixture('users.json').as('users')
     })
 
-    it.only("Login and Verify that there is content in top menu", {tags: '@smoke'}, function () {
+     it("should login successfully and post a text Imprint", {tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
 
-            TopMenu.homeButton()
+        AccountPage.h2Heading
+            .should('contains.text', 'Personal Tribe');
 
-            TopMenu.newsButton()
+        Timeline.textImprint()
 
-            TopMenu.entertainmentButton()
+        Timeline.verifyTextImprint()
 
-            TopMenu.notificationButton()
+     })
 
-            TopMenu.messageButton()
-
-            TopMenu.analyticalButton()
-        
-    })
 
 })
