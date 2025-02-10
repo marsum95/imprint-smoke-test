@@ -26,127 +26,87 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-    
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
         EntertainmentPage.entertainmentButton()
-
         EntertainmentPage.title
             .should('contain.text', 'Anonymous Good Deeds')
-
-        EntertainmentPage.shareAGD
+        EntertainmentPage.share
             .click()
-
         EntertainmentPage.verifyTimelinePost()
 
     })
 
-    it.skip("should login successfully and submit a QOTD", {tags: '@smoke'}, function () {
-
+    it("should login successfully and submit a QOTD", {tags: '@smoke'}, function () {
+        //Failing due to string issue
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-    
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
         EntertainmentPage.entertainmentButton()
-
         EntertainmentPage.quoteOfTheDay
             .click()
-
-        EntertainmentPage.shareAGD
+        EntertainmentPage.share
             .click()
-
-        EntertainmentPage.verifyTimelinePost()
-
+        EntertainmentPage.verifyQODContent()
     })
 
     it("should login successfully and submit a JOTD", {tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-    
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
         EntertainmentPage.entertainmentButton()
-
         EntertainmentPage.jokeOfTheDay
             .click()
-
-        EntertainmentPage.shareAGD
+        EntertainmentPage.share
             .click()
-
         EntertainmentPage.verifyTimelinePost()
     })
-
 
     it("should login successfully and share a Quiz", {tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-    
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
         EntertainmentPage.entertainmentButton()
-
         EntertainmentPage.quiz
             .click()
-
         EntertainmentPage.share
-            .eq(0)
             .click()
-
         EntertainmentPage.verifyTimelinePost()
-
     })
 
     it("should login successfully and Re-Attempt a Quiz", {tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-    
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
         EntertainmentPage.entertainmentButton()
-
         EntertainmentPage.quiz
             .click()
-
         EntertainmentPage.reattempt
-            .eq(0)
             .click()
-
         EntertainmentPage.selectAnswer()
-
         EntertainmentPage.verifyTimelinePost()
-
     })
 
     it("should login successfully and Play a Quiz", {tags: '@smoke'}, function () {
 
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-    
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
         EntertainmentPage.entertainmentButton()
-
         EntertainmentPage.quiz
             .click()
-
         EntertainmentPage.start
-            .eq(0)
             .click()
-
         EntertainmentPage.selectAnswer()
-
         EntertainmentPage.verifyTimelinePost()
-
     })
 
 })

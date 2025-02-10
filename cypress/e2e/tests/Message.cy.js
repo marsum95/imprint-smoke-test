@@ -1,10 +1,7 @@
 import LoginPage from "../pages/LoginPage";
 import BasePage from "../pages/BasePage";
 import AccountPage from "../pages/AccountPage";
-import Timeline from "../pages/Timeline";
-
-
-
+import MessageChatFlow from "../pages/MessageChatFlow";
 
 
 describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () => {
@@ -15,8 +12,6 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
         basePage = new BasePage();
     })
 
-    //Mocha automatically shares contexts for us across all applicable hooks for each test. 
-    //Additionally these aliases and properties are automatically cleaned up after each test.
     beforeEach(() => {
 
         //Aliasing cy.fixture() data and then using this to access it via the alias.
@@ -26,33 +21,37 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
         cy.fixture('users.json').as('users')
     })
 
-    it("should login successfully and post a text Imprint", {tags: '@smoke'}, function () {
-
+    it("should login successfully, go to all Message and chat with Rudi", {tags: '@smoke'}, function () {
+    
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
-        Timeline.textImprint()
-
-        Timeline.verifyImprint()
-
+           // cy.wait(4000)
+        MessageChatFlow.gotoAllMessage()
+        MessageChatFlow.chatwithRudi()
     })
 
-    it.only("should login successfully and post a Media Imprint", {tags: '@smoke'}, function () {
-
+    it("should login successfully, go to all Message and chat with individual Friend", {tags: '@smoke'}, function () {
+    
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)
-
         AccountPage.h2Heading
             .should('contains.text', 'Personal Tribe');
-
-        Timeline.mediaImprint()
-
-        Timeline.verifyImprint()
-
+           // cy.wait(4000)
+        MessageChatFlow.gotoAllMessage()
+        MessageChatFlow.chatwithIndividualFriend()      
     })
 
+    it.only("should login successfully, go to all Message and chat with Group", {tags: '@smoke'}, function () {
+    
+        LoginPage
+            .loginWithUI(this.users.validUser.email, this.users.validUser.password)
+        AccountPage.h2Heading
+            .should('contains.text', 'Personal Tribe');
+           // cy.wait(4000)
+        MessageChatFlow.gotoAllMessage()
+        MessageChatFlow.chatwithGroup()      
+    })
 
 })

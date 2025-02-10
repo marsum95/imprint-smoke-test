@@ -22,6 +22,7 @@ class AccountPage extends BasePage{
     get successLabel() { return cy.get('.success-label')}
     get userNameOnQuiz() {return cy.get('h1')}
     get profileName() { return cy.get('.flex-badge > h2')}
+    get subscriptionPageTitle() { return cy.get('.heading > h1')}
 
     open() {
         return super.open(ENDPOINT_PREFIX + routes.ACCOUNT_ENDPOINT)

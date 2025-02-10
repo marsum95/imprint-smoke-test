@@ -4,7 +4,7 @@ import { ENDPOINT_PREFIX } from "../config/constants";
 
 class EntertainmentPage extends BasePage{
 
-    get entertainment() { return cy.get('[style="opacity:1;order:2"] > .ant-menu-title-content')}//click on Entertainment icon
+    get entertainment() { return cy.get('a[title="Entertainment"]')}//click on Entertainment icon
     get title() {return cy.get('.entertainment-page_header__kBkg1 > h1')}// verify the header of the Entertainment section
     get anonymouseGoodDeed() {return cy.get('.mob-scroll > .ant-menu > .ant-menu-item-selected')} //click on Anonymouse Good Deed
     get quoteOfTheDay() {return cy.get('.ant-menu-title-content').contains('Quote of the Day')} //click on Quote of the day
@@ -14,7 +14,7 @@ class EntertainmentPage extends BasePage{
     
 
     // Anounymous Good Deed
-    get shareAGD() {return cy.get(':nth-child(1) > .ant-row > .entertainment-card_justifyEnd__GRc0z > .entertainment-card_ShareButton__L4yVh > .entertainment-card_ButtonContainer__nVDLy > .button-create > .ant-btn')} //click on 1st sahre button
+    //get sharecontent() {return cy.get('button[text="Share"]').eq(0)} //click on 1st sahre button
     get publishAGD() {return cy.get('.ant-btn-primary')}
     get cancelAGD() {return cy.get('.ant-modal-footer > .ant-btn-default')}
     get selectTribe() {return cy.get('.ant-select-selection-item')}
@@ -23,11 +23,14 @@ class EntertainmentPage extends BasePage{
 
     get postedContent() {return cy.get(':nth-child(1) > .edit-view-post-card > .post-card-content > .ant-row > :nth-child(1)')}
 
+    //QOD
+    get QODtext() { return cy.get('.entertainment-modal_PreviewCardBody__pvES8')}
+
 
     //Quiz
-    get share() {return cy.get('button[text="Share"]')}
-    get start() {return cy.get('button[text="Start"]')}
-    get reattempt() {return cy.get('button[text="Reattempt"]')}
+    get share() {return cy.get('button[text="Share"]').eq(0)} //share button in entertainment section AGD, QOD, JOD, Quiz
+    get start() {return cy.get('button[text="Start"]').eq(0)}
+    get reattempt() {return cy.get('button[text="Reattempt"]').eq(0)}
     get selectOptions() {return cy.get('.entertainment-modal_Question__d6H8I')}
 
 
@@ -39,8 +42,8 @@ class EntertainmentPage extends BasePage{
 
 
     entertainmentButton() {
-            cy.wait(5000);
-            this.entertainment.click()
+            //cy.wait(5000);
+            this.entertainment.should('be.visible').click()
             .then(() => {
                 // Assert the URL includes the expected value
                 //const expectedUrlSegment = notification.tooltip.toLowerCase(); // Assuming URL is based on tooltip text
@@ -51,9 +54,9 @@ class EntertainmentPage extends BasePage{
 
     getAGDContent() {
         return  this.contentAGD
-                .invoke('text')  // Or use 'html' if you need to get the inner HTML
-                .then((content)=> {
-                    return content
+                    .invoke('text')  // Or use 'html' if you need to get the inner HTML
+                        .then((content)=> {
+                            return content
                 })
             }
 
@@ -61,6 +64,25 @@ class EntertainmentPage extends BasePage{
             this.postedContent
                 .should('include.text', content)
     }
+
+    verifyQODContent() {
+        return this.QODtext
+                    .invoke('text')
+                        .then((content) => {
+                            const cleanedText = content.split('.')[0].trim()
+                            expect(cleanedText).to.not.be.empty;
+                            cy.log(cleanedText)
+                            
+                            this.selectTribe
+                                .click()
+                            this.publishAGD
+                                .click()
+                            this.gotoTimeline
+                                .click()   
+                            this.postedContent.should('contain.text', cleanedText)   
+                        })
+                
+        }
     
     selectAnswer(){
         this.selectOptions
@@ -78,21 +100,15 @@ class EntertainmentPage extends BasePage{
 
     verifyTimelinePost()
     {
-        
         this.getAGDContent().then(content => {
-        this.selectTribe
-            .click()
-
-        this.publishAGD
-            .click()
-
-        this.gotoTimeline
-            .click()   
-
-        this.verifyContent(content) 
-
-        })
-        
+            this.selectTribe
+                .click()
+            this.publishAGD
+                .click()
+            this.gotoTimeline
+                .click()   
+            this.verifyContent(content) 
+        })    
     }
 }
 

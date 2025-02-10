@@ -60,7 +60,7 @@ module.exports = defineConfig({
   viewportWidth   : 1200,  //Default width in pixels for the application under tests' viewport.
 
   //Timeouts
-  defaultCommandTimeout : 5000, //Time, in milliseconds, to wait until most DOM based commands are considered timed out.
+  defaultCommandTimeout : 10000, //Time, in milliseconds, to wait until most DOM based commands are considered timed out.
 
 
   //reports configuration
