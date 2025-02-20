@@ -1,7 +1,7 @@
 import { validationMessages } from '../config/errorMessages';
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import BasePage from '../pages/BasePage';
-import SigninFlowPage from '../pages/SigninFlowPage';
+import SigninPage from '../pages/SigninPage';
 
 import { faker } from '@faker-js/faker';
 
@@ -20,10 +20,7 @@ describe('Login and Quiz Flow', { tags: ['@Login', '@regression'] }, () => {
         cy.fixture('users.json').as('users');
 
         cy.get('@users').then((users) => {
-            SigninFlowPage.loginWithUI(
-                users.newUser.email,
-                users.newUser.password
-            );
+            SigninPage.loginWithUI(users.newUser.email, users.newUser.password);
         });
     });
 
@@ -31,13 +28,13 @@ describe('Login and Quiz Flow', { tags: ['@Login', '@regression'] }, () => {
         'should login successfully with valid credentials and complete signup flow',
         { tags: '@smoke' },
         function () {
-            AccountPage.verifyWelcomeText();
-            SigninFlowPage.userProfilePic();
-            SigninFlowPage.userDisplayName(faker.person.fullName());
-            SigninFlowPage.userNameValid(faker.person.firstName());
-            SigninFlowPage.userAboutme(faker.person.bio());
-            SigninFlowPage.registerProfile();
-            AccountPage.verifyNameOnQuiz();
+            UiVerificationPage.verifyWelcomeText();
+            SigninPage.userProfilePic();
+            SigninPage.userDisplayName(faker.person.fullName());
+            SigninPage.userNameValid(faker.person.firstName());
+            SigninPage.userAboutme(faker.person.bio());
+            SigninPage.registerProfile();
+            UiVerificationPage.verifyNameOnQuiz();
         }
     );
 
@@ -45,33 +42,33 @@ describe('Login and Quiz Flow', { tags: ['@Login', '@regression'] }, () => {
         'should not login and give validation error',
         { tags: '@smoke' },
         function () {
-            AccountPage.verifyWelcomeText();
-            SigninFlowPage.registerProfile();
+            UiVerificationPage.verifyWelcomeText();
+            SigninPage.registerProfile();
             cy.validateFormField(
-                SigninFlowPage.displaynameInput,
+                SigninPage.displaynameInput,
                 validationMessages.DISPLAYNAME
             );
-            SigninFlowPage.userDisplayName(faker.person.fullName());
-            SigninFlowPage.registerProfile();
+            SigninPage.userDisplayName(faker.person.fullName());
+            SigninPage.registerProfile();
             cy.validateFormField(
-                SigninFlowPage.usernameInput,
+                SigninPage.usernameInput,
                 validationMessages.USERNAME
             );
-            SigninFlowPage.userNameValid(faker.person.firstName());
-            AccountPage.verifyUsernameAvailablity();
+            SigninPage.userNameValid(faker.person.firstName());
+            UiVerificationPage.verifyUsernameAvailablity();
 
-            SigninFlowPage.userAboutme(faker.person.bio());
+            SigninPage.userAboutme(faker.person.bio());
 
             cy.validateFormField(
-                SigninFlowPage.displaynameInput,
+                SigninPage.displaynameInput,
                 validationMessages.DISPLAYPIC
             );
-            SigninFlowPage.userProfilePic();
-            SigninFlowPage.registerProfile();
+            SigninPage.userProfilePic();
+            SigninPage.registerProfile();
         }
     );
 
     it.skip('Login and fill Quiz', { tags: '@smoke' }, function () {
-        SigninFlowPage.openquiz();
+        SigninPage.openquiz();
     });
 });

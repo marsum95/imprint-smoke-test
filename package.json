@@ -26,10 +26,7 @@
     "test:addToCart": "npx cypress run --spec cypress/e2e/tests/AddToCartTest.cy.js",
     "test:wishlist": "npx cypress run --spec cypress/e2e/tests/WishlistTest.cy.js",
     "test:productSearch": "npx cypress run --spec cypress/e2e/tests/ProductsSearchTest.cy.js",
-    "run-tests-in-order": "npx cypress run --spec 'cypress/e2e/tests/RegistrationTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/LoginTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/TimelineTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/EntertainmentFlow.cy.js' && npx cypress run --spec 'cypress/e2e/tests/Message.cy.js' && npx cypress run --spec 'cypress/e2e/tests/SubscriptionTest.cy.js'"
-    
-    
-    
+    "run-tests-in-order": "npx cypress run --spec 'cypress/e2e/tests/RegistrationTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/LoginTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/TimelineTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/EnterrainmentTest.cy.js' && npx cypress run --spec 'cypress/e2e/tests/Message.cy.js' && npx cypress run --spec 'cypress/e2e/tests/SubscriptionTest.cy.js'"
   },
   "repository": {
     "type": "git",

@@ -1,6 +1,6 @@
 import BasePage from './BasePage';
 const routes = require('../config/routes');
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import EntertainmentPage from './EntertainmentPage';
 import { ENDPOINT_PREFIX } from '../config/constants';
 
@@ -34,7 +34,10 @@ class TopMenuPage extends BasePage {
         this.home.click().then(() => {
             // Assert the URL includes the expected value
             cy.url().should('include', `/${routes.HOME}`);
-            AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+            UiVerificationPage.h2Heading.should(
+                'contains.text',
+                'Personal Tribe'
+            );
         });
     }
 

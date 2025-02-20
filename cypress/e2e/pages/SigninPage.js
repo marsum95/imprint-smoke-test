@@ -2,7 +2,7 @@ import BasePage from './BasePage';
 const routes = require('../config/routes');
 import { ENDPOINT_PREFIX } from '../config/constants';
 
-class SigninFlowPage extends BasePage {
+class SigninPage extends BasePage {
     get loginInput() {
         return cy.get('input[name="email"]');
     }
@@ -95,4 +95,4 @@ class SigninFlowPage extends BasePage {
     }
 }
 
-export default new SigninFlowPage();
+export default new SigninPage();

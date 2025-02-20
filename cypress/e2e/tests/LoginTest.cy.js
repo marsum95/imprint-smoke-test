@@ -1,4 +1,4 @@
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import BasePage from '../pages/BasePage';
 import LoginPage from '../pages/LoginPage';
 
@@ -27,7 +27,7 @@ describe(
             'should login successfully with valid credentials',
             { tags: '@smoke' },
             function () {
-                AccountPage.verifyTimelineHeading();
+                UiVerificationPage.verifyTimelineHeading();
             }
         );
 
@@ -48,7 +48,7 @@ describe(
             // cy.login(); //login via custom command
 
             basePage.header.performLogout();
-            AccountPage.verifyLogout();
+            UiVerificationPage.verifyLogout();
         });
 
         const notifications = [
@@ -77,7 +77,7 @@ describe(
 
             cy.url().should('include', '/profile');
 
-            AccountPage.profileName.should(($el) => {
+            UiVerificationPage.profileName.should(($el) => {
                 const text = $el.text(); // Extract the text content of the element
                 expect(text.trim()).to.not.be.empty; // Validate that the text is not empty or just whitespace
             });
@@ -174,7 +174,7 @@ describe(
                         });
                 });
 
-                AccountPage.h1Heading
+                UiVerificationPage.h1Heading
                     .should('contains.text', 'Log Out')
                     .click({ force: true }); // Logout functionality
                 cy.url().should('include', '/login'); // Ensure user is redirected to login page

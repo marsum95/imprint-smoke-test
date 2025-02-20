@@ -1,4 +1,4 @@
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import BasePage from '../pages/BasePage';
 import LoginPage from '../pages/LoginPage';
 import TopMenuPage from '../pages/TopMenuPage';

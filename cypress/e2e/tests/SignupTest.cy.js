@@ -1,5 +1,5 @@
 import { validationMessages } from '../config/errorMessages';
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import LoginPage from '../pages/LoginPage';
 import SignupPage from '../pages/SignupPage';
 
@@ -15,7 +15,7 @@ describe('Account Registration', { tags: ['@Register', '@regression'] }, () => {
         // cy.fixture('users.json').then((users) => {
         // cy.log(JSON.stringify(this.users)); // Log the users object
         SignupPage.signupFormData();
-        AccountPage.successSignup();
+        UiVerificationPage.successSignup();
         // });
     });
 

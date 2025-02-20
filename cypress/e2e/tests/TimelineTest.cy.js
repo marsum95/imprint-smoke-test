@@ -1,6 +1,6 @@
 import LoginPage from '../pages/LoginPage';
 import BasePage from '../pages/BasePage';
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import TimelinePage from '../pages/Timeline';
 
 describe(
@@ -31,7 +31,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
                 cy.wait(3000);
                 Timeline.clickOnTimeline.should('be.visible').click();
                 Timeline.textImprint();
@@ -47,7 +50,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
                 cy.wait(3000);
                 Timeline.clickOnTimeline.should('be.visible').click();
                 Timeline.clickonEditor.should('be.visible');
@@ -64,7 +70,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
                 cy.wait(3000);
                 Timeline.clickOnTimeline.should('be.visible').click();
 
@@ -82,7 +91,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
                 cy.wait(3000);
                 Timeline.clickOnTimeline.should('be.visible').click();
                 Timeline.checkinImprint();
@@ -102,7 +114,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
                 cy.wait(3000);
                 Timeline.clickOnTimeline.should('be.visible').click();
                 Timeline.checkVerifedImprint();
@@ -118,7 +133,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
 
                 Timeline.checkforVerifyTick
                     .trigger('mouseover')
@@ -134,7 +152,10 @@ describe(
                     this.users.validUser.email,
                     this.users.validUser.password
                 );
-                AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+                UiVerificationPage.h2Heading.should(
+                    'contains.text',
+                    'Personal Tribe'
+                );
 
                 cy.get('.ant-menu-title-content').contains('Love').click();
                 // Check if the image has alt="Life" and the src includes the correct image URL
@@ -308,7 +329,7 @@ describe(
                                         this.users.validUser.password
                                     );
 
-                                    AccountPage.h2Heading.should(
+                                    UiVerificationPage.h2Heading.should(
                                         'contains.text',
                                         'Personal Tribe'
                                     );

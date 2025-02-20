@@ -1,5 +1,5 @@
 // import { ENTERTAINMENT } from "../config/routes";
-import AccountPage from '../pages/AccountPage';
+import UiVerificationPage from '../pages/UiVerificationPage';
 import BasePage from '../pages/BasePage';
 import LoginPage from '../pages/LoginPage';
 import EntertainmentPage from '../pages/EntertainmentPage';
@@ -25,7 +25,7 @@ describe('Entertainment flow', { tags: ['@Login', '@regression'] }, () => {
                 users.validUser.password
             );
         });
-        AccountPage.h2Heading.should('contains.text', 'Personal Tribe');
+        UiVerificationPage.h2Heading.should('contains.text', 'Personal Tribe');
 
         EntertainmentPage.clickOnEntertainmentButton();
     });
