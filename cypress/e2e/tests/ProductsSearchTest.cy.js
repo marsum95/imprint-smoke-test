@@ -3,7 +3,7 @@ import { default as ProductsSearchPage } from "../pages/ProductsSearchPage";
 import { extractActualPrices, extractProductsName } from "../utils/ProductUtils";
 import productCategories  from "../../fixtures/productCategories.json";
 
-describe('Products meeting the search criteria', { tags: ['@Search', '@regression'] }, () => {
+describe('Products meeting the search criteria', { tags: ['@Search', '@regression1'] }, () => {
 
     beforeEach(() => {
         ProductsSearchPage.open();

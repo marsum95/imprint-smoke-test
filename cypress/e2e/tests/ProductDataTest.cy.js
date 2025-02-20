@@ -2,7 +2,7 @@ import BasePage from "../pages/BasePage";
 import ProductDetailsPage from "../pages/ProductDetailsPage";
 import ProductsSearchPage from "../pages/ProductsSearchPage";
 
-describe('product details and search', { tags: ['@Product', '@regression'] }, () => {
+describe('product details and search', { tags: ['@Product', '@regression1'] }, () => {
 
     let basePage;
 

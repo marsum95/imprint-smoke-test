@@ -2,7 +2,7 @@ import { PRODUCT_ID_TO_TEST, PRODUCT_TO_TEST } from "../config/constants";
 import { default as ProductDetailsPage } from "../pages/ProductDetailsPage";
 import WishlistPage from "../pages/WishlistPage";
 
-describe('adding and removing products from wishlist', { tags: ['@Wishlist', '@regression'] }, () => {
+describe('adding and removing products from wishlist', { tags: ['@Wishlist', '@regression1'] }, () => {
     context('logged-in user', () => {
         beforeEach(() => {
             cy.login();

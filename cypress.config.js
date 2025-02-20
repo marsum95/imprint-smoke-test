@@ -98,7 +98,7 @@ module.exports = defineConfig({
 
       //Load the testing configuration and environment variables from separate JSON files.
       //we put the baseUrl and envionment specific config settings in settings/env.settings.json
-      const environmentName = config.env.environmentName || 'local';
+      const environmentName = config.env.environmentName || 'qa';
       const environmentFilename = `./settings/${environmentName}.settings.json`;
       console.log('loading %s', environmentFilename);
       const settings = require(environmentFilename);
@@ -137,7 +137,7 @@ module.exports = defineConfig({
     //Any key/value you set in your Cypress configuration under the env key will become an environment variable.
     //When your tests are running, you can use the Cypress.env function to access the values of your environment variables.
     env : {
-      URL : 'https://naveenautomationlabs.com/opencart/index.php'
+      URL : 'https://sigma.imprint.live'
     }
 
   },

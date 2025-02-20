@@ -4,7 +4,7 @@ import AccountPage from "../pages/AccountPage";
 import MessageChatFlow from "../pages/MessageChatFlow";
 
 
-describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () => {
+describe("Login and then cover Message flow which include chat with Rudi, Individual Chat and Group Chat", { tags: ['@Login', '@regression'] }, () => {
 
     let basePage;
 
@@ -43,7 +43,7 @@ describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () 
         MessageChatFlow.chatwithIndividualFriend()      
     })
 
-    it.only("should login successfully, go to all Message and chat with Group", {tags: '@smoke'}, function () {
+    it("should login successfully, go to all Message and chat with Group", {tags: '@smoke'}, function () {
     
         LoginPage
             .loginWithUI(this.users.validUser.email, this.users.validUser.password)

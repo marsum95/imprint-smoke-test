@@ -2,7 +2,7 @@ import BasePage from "./BasePage";
 import { ENDPOINT_PREFIX } from "../config/constants";
 import routes from "../config/routes";
 
-class Timeline extends BasePage{
+class TimelinePage extends BasePage{
    // cy.get('[style="padding-left: 12px; padding-right: 12px; flex: 1 1 auto;"] > .quill > .ql-container > .ql-editor > p')
     
     get clickOnTimeline() { return cy.get('.post-card > .post-card-content')}
@@ -153,6 +153,9 @@ class Timeline extends BasePage{
         this.clickon3Dots.should('be.visible').click()
         this.clickonVerify.should('be.visible').click()
         this.textImprint()
+    }
+    postValueBadge(){
+        const
     }
 
 }

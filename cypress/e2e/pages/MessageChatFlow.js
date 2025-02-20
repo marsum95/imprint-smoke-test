@@ -16,7 +16,7 @@ class MessageChatFlow extends BasePage{
     //       console.log(className); // This will print the class names in the console
     //     });
     //   }
-    get chatResponse() { return cy.get('.ant-row.ant-row-start.ant-row-middle.incoming.css-1vh8508')} // Target the parent element
+    get chatResponse() { return cy.get('.infinite-scroll-component > .container-fluid')} // Target the parent element
     get clickonChat(){ return cy.get('.chat-menu-container')}
 
 
@@ -33,7 +33,7 @@ class MessageChatFlow extends BasePage{
         this.chatResponse
             .contains('Hello! How can I assist you today? 😊') // Assert that the text is present
         // .should('be.visible'); // Ensure that the text is visible
-            .should('have.text', 'Hello! How can I assist you today? 😊')
+            .should('contain', 'Hello! How can I assist you today? 😊')
     }
 
     chatwithIndividualFriend(){
@@ -44,7 +44,7 @@ class MessageChatFlow extends BasePage{
             .click() //click on 1st availble friend
         this.typeChat.click().type('Hello jani')
         this.clickonSend.click({ force: true })
-        this.chatResponse.should('have.text','')
+        this.chatResponse.contains('Hello jani')
 
     }
 

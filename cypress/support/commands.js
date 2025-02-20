@@ -26,20 +26,20 @@
 
 import 'cypress-file-upload';
 
-import LoginPage from "../e2e/pages/LoginPage"
-import RegisterPage from "../e2e/pages/RegisterPage";
+import LoginPage from '../e2e/pages/LoginPage';
+import SignupPage from '../e2e/pages/SignupPage';
 
 Cypress.Commands.add('login', () => {
+    //command for login with valid user
 
     cy.fixture('users.json').then((users) => {
-
         LoginPage.loginWithUI(users.validUser.email, users.validUser.password);
-    })
-
-})
+    });
+});
 
 Cypress.Commands.add('validateFormField', (inputField, message) => {
-    return inputField.then(($input) => RegisterPage.inputValidationErr($input))
-            .should('be.visible')
-            .and('have.text', message)
-})
+    return inputField
+        .then(($input) => SignupPage.inputValidationErr($input))
+        .should('be.visible')
+        .and('have.text', message);
+});

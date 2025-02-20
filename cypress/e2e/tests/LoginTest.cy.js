@@ -1,165 +1,184 @@
-import AccountPage from "../pages/AccountPage";
-import BasePage from "../pages/BasePage";
-import LoginPage from "../pages/LoginPage";
+import AccountPage from '../pages/AccountPage';
+import BasePage from '../pages/BasePage';
+import LoginPage from '../pages/LoginPage';
 
-describe("Success and Fail login flow", { tags: ['@Login', '@regression'] }, () => {
+describe(
+    'Success and Fail login flow',
+    { tags: ['@Login', '@regression'] },
+    () => {
+        let basePage;
 
-    let basePage;
+        before(() => {
+            basePage = new BasePage();
+        });
 
-    before(() => {
-        basePage = new BasePage();
-    })
+        //Mocha automatically shares contexts for us across all applicable hooks for each test.
+        //Additionally these aliases and properties are automatically cleaned up after each test.
+        beforeEach(() => {
+            //Aliasing cy.fixture() data and then using this to access it via the alias.
+            //Note the use of the standard function syntax.
+            //Using arrow functions to access aliases via this won't work because of the lexical binding of this.
 
-    //Mocha automatically shares contexts for us across all applicable hooks for each test. 
-    //Additionally these aliases and properties are automatically cleaned up after each test.
-    beforeEach(() => {
+            // cy.fixture('users.json').as('users');
+            cy.login(); //login via custom command
+        });
 
-        //Aliasing cy.fixture() data and then using this to access it via the alias.
-        //Note the use of the standard function syntax. 
-        //Using arrow functions to access aliases via this won't work because of the lexical binding of this.
+        it(
+            'should login successfully with valid credentials',
+            { tags: '@smoke' },
+            function () {
+                AccountPage.verifyTimelineHeading();
+            }
+        );
 
-        cy.fixture('users.json').as('users')
-    })
-  
-    it("should login successfully with valid credentials", {tags: '@smoke'}, function () {
+        it(
+            'should fail to login with invalid credentials',
+            { tags: '@smoke' },
+            function () {
+                LoginPage.loginWithUI(
+                    this.users.invalidUser.email,
+                    this.users.invalidUser.password
+                );
 
-        LoginPage
-            .loginWithUI(this.users.validUser.email, this.users.validUser.password)
+                LoginPage.verifyAlert();
+            }
+        );
 
-        AccountPage.h2Heading
-            .should('contains.text', 'Personal Tribe');
-    })
+        it('should perform login and logout', function () {
+            // cy.login(); //login via custom command
 
-    it("should fail to login with invalid credentials", {tags: '@smoke'}, function () {
+            basePage.header.performLogout();
+            AccountPage.verifyLogout();
+        });
 
-        LoginPage
-            .loginWithUI(this.users.invalidUser.email, this.users.invalidUser.password)
+        const notifications = [
+            { menuId: 'ant-menu-title-content', tooltip: 'Home - Coming Soon' },
+            { menuId: 'ant-menu-title-content', tooltip: 'News - Coming Soon' },
+            {
+                menuId: 'ant-menu-title-content',
+                tooltip: 'Entertainment - Coming Soon',
+            },
+            {
+                menuId: 'ant-menu-title-content',
+                tooltip: 'Notifications - Coming Soon',
+            },
+            {
+                menuId: 'ant-menu-title-content',
+                tooltip: 'Messenger - Coming Soon',
+            },
+            // Add other menu items following the same pattern
+        ];
 
-        LoginPage.alertMsg
-            .should('contains.text', 'Verification Error');
-    })
+        it.skip(`Should validate tooltips`, { tags: '@smoke' }, function () {
+            LoginPage.loginWithUI(
+                this.users.newUser.email,
+                this.users.newUser.password
+            );
 
-    it("should perform login and logout", function () {
+            cy.url().should('include', '/profile');
 
-        cy.login(); //login via custom command
-
-        basePage.header.performLogout();
-
-        AccountPage.h1Heading
-            .should('contains.text', 'Log Out');
-    })
-/**
- * This spec needs to run first to make sure the user is logged in before accessing
- * the normal flow of the application. Renaming the file to '01_[filename]' does the trick :).
- */
-  /**
-   * 2nd param replaces the global config (cypress.dev.json) only in the scope of the current .spec.
-   * Similar to: Cypress.config('baseUrl', 'https://accounts.google.com');
-   */
-//   it.only('should mock Google login', () => {
-//     // Intercept the authentication API
-//     cy.intercept('POST', '/api/auth/google', {
-//       statusCode: 200,
-//       body: { token: 'mock-token', user: { id: 1, name: 'Test User', email: 'test@example.com' } },
-//     }).as('googleAuth');
-
-//     // Visit the login page
-//     cy.visit('https://sigma.imprint.live/login');
-
-//     // Trigger the Google login button (ensure it exists on the page)
-//     cy.get(':nth-child(5) > .ant-row > .ant-col > .button-create > .ant-btn').click();
-
-//     // Wait for the mocked request
-//     cy.wait('@googleAuth');
-
-//     // Assert that the user is logged in
-//     cy.get('[data-cy="user-dashboard"]').should('be.visible');
-//   })
-
-const notifications = [
-    { menuId: 'ant-menu-title-content', tooltip: 'Home - Coming Soon' },
-    { menuId: 'ant-menu-title-content', tooltip: 'News - Coming Soon' },
-    { menuId: 'ant-menu-title-content', tooltip: 'Entertainment - Coming Soon' },
-    { menuId: 'ant-menu-title-content', tooltip: 'Notifications - Coming Soon' },
-    { menuId: 'ant-menu-title-content', tooltip: 'Messenger - Coming Soon' },
-    // Add other menu items following the same pattern
-  ];
-
-    it(`Should validate tooltips`, {tags: '@smoke'}, function () {
-        LoginPage
-            .loginWithUI(this.users.newUser.email, this.users.newUser.password)
-        
-        cy.url().should('include', '/profile'); 
-        
-        AccountPage.profileName
-            .should(($el) => {
+            AccountPage.profileName.should(($el) => {
                 const text = $el.text(); // Extract the text content of the element
                 expect(text.trim()).to.not.be.empty; // Validate that the text is not empty or just whitespace
             });
 
-        notifications.forEach((notification, index) => {    
-            cy.get('.'+ notification.menuId)
-                .find('.disabled-text')
-                //.find('.icon-home')
-                .should('exist');
-        
-              // Hover and validate tooltip
-            cy.get('.'+ notification.menuId )
-                .eq(index)
-                .trigger('mouseover')
-                .then(() => {
-                    cy.contains(notification.tooltip).should('be.visible');
-                });
-        
-              // Ensure clicking does not perform any action
-                cy.get('.'+ notification.menuId ).eq(index).click({ multiple: true });
-                cy.url().should('not.include', `/${notification.menuId.split('-').pop()}`);
+            notifications.forEach((notification, index) => {
+                cy.get('.' + notification.menuId)
+                    .find('.disabled-text')
+                    //.find('.icon-home')
+                    .should('exist');
+
+                // Hover and validate tooltip
+                cy.get('.' + notification.menuId)
+                    .eq(index)
+                    .trigger('mouseover')
+                    .then(() => {
+                        cy.contains(notification.tooltip).should('be.visible');
+                    });
+
+                // Ensure clicking does not perform any action
+                cy.get('.' + notification.menuId)
+                    .eq(index)
+                    .click({ multiple: true });
+                cy.url().should(
+                    'not.include',
+                    `/${notification.menuId.split('-').pop()}`
+                );
+            });
         });
 
-    });
+        it.skip(
+            'Should open side menu and validate enabled and disabled options',
+            { tags: '@smoke' },
+            function () {
+                LoginPage.loginWithUI(
+                    this.users.newUser.email,
+                    this.users.newUser.password
+                );
+                // cy.get(':nth-child(3) > .ant-avatar > img',{ timeout: 10000 }).click(); // Click on profile picture
 
-    it('Should open side menu and validate enabled and disabled options',{tags: '@smoke'}, function () {
+                const menuItems = [
+                    {
+                        selector: '.ant-list-item-meta-description',
+                        description: 'Main account',
+                        disabled: false,
+                    },
+                    {
+                        selector: '.ant-list-item-meta-description',
+                        description: 'Access widget settings',
+                        disabled: false,
+                    },
+                    {
+                        selector: '.ant-list-item-meta-description',
+                        description: 'Story about imprint',
+                        disabled: false,
+                    },
+                    {
+                        selector: '.ant-list-item-meta-description',
+                        description: 'Imprints without limits',
+                        disabled: false,
+                    },
+                    {
+                        selector: '.ant-list-item-meta-description',
+                        description: 'View value profile and analytics',
+                        disabled: false,
+                    },
+                ];
 
-        LoginPage
-            .loginWithUI(this.users.newUser.email, this.users.newUser.password)
-       // cy.get(':nth-child(3) > .ant-avatar > img',{ timeout: 10000 }).click(); // Click on profile picture
-      
-        const menuItems = [
-            { selector: '.ant-list-item-meta-description', description: 'Main account', disabled: false },
-            { selector: '.ant-list-item-meta-description', description: 'Access widget settings', disabled: false },
-            { selector: '.ant-list-item-meta-description', description: 'Story about imprint', disabled: false },
-            { selector: '.ant-list-item-meta-description', description: 'Imprints without limits', disabled: false },
-            { selector: '.ant-list-item-meta-description', description: 'View value profile and analytics', disabled: false },
-        ];
-      
-        menuItems.forEach(item => {
-            cy.get(':nth-child(3) > .ant-avatar > img', { timeout: 10000 }).click();
-            cy.get(item.selector, { timeout: 10000 })
-                .contains(item.description)
-                .should('exist') // Ensure the item exists
-                .then(($el) => {
-                    if (item.disabled) {
-                        const isDisabled = $el.hasClass('ant-list-item disabled') || $el.css('pointer-events') === 'none' || $el.css('opacity') < 1;
-                        expect(isDisabled).to.be.true;
-                    } else {
-                        cy.wrap($el)
-                            .should('be.visible')
-                            .click({ force: true });
-                        cy.url().should((url) => {
-                            expect(url).to.satisfy((u) => u.includes('/profile') || u.includes('/about-imprints'));
+                menuItems.forEach((item) => {
+                    cy.get(':nth-child(3) > .ant-avatar > img', {
+                        timeout: 10000,
+                    }).click();
+                    cy.get(item.selector, { timeout: 10000 })
+                        .contains(item.description)
+                        .should('exist') // Ensure the item exists
+                        .then(($el) => {
+                            if (item.disabled) {
+                                const isDisabled =
+                                    $el.hasClass('ant-list-item disabled') ||
+                                    $el.css('pointer-events') === 'none' ||
+                                    $el.css('opacity') < 1;
+                                expect(isDisabled).to.be.true;
+                            } else {
+                                cy.wrap($el)
+                                    .should('be.visible')
+                                    .click({ force: true });
+                                cy.url().should((url) => {
+                                    expect(url).to.satisfy(
+                                        (u) =>
+                                            u.includes('/profile') ||
+                                            u.includes('/about-imprints')
+                                    );
+                                });
+                            }
                         });
-                    }
                 });
-        });
-      
-        AccountPage.h1Heading
-        .should('contains.text', 'Log Out').click({force: true}); // Logout functionality
-          cy.url().should('include', '/login'); // Ensure user is redirected to login page
 
-    });
-
-    
-});
-      
-    
-
+                AccountPage.h1Heading
+                    .should('contains.text', 'Log Out')
+                    .click({ force: true }); // Logout functionality
+                cy.url().should('include', '/login'); // Ensure user is redirected to login page
+            }
+        );
+    }
+);

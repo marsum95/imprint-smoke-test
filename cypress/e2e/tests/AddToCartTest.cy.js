@@ -5,7 +5,7 @@ import ShoppingCartPage from "../pages/ShoppingCartPage";
 // import * as constants from "../config/constants";  
 import { PRODUCT_TO_TEST as PRODUCT, PRODUCT_ID_TO_TEST as PRODUCT_ID } from "../config/constants";  
 
-describe("adding products to cart", { tags: ['@Cart', '@regression'] }, () => {
+describe("adding products to cart", { tags: ['@Cart', '@regression1'] }, () => {
 
     let basePage;
 

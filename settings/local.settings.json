@@ -1,5 +1,5 @@
 {
-    "baseUrl": "https://sigma.imprint.live/",
+    "baseUrl": "https://local.imprint.live/",
     "env": {
         "environment": "local"
       },

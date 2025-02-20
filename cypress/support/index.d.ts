@@ -12,9 +12,11 @@ declare namespace Cypress {
          * @param {Chainable<JQuery<HTMLElement>>} inputField - The input field element.
          * @param {string} message - The expected validation message.
          * @example
-         * cy.validateFormField(RegisterPage.firstnameInput, 'Invalid input provided');
+         * cy.validateFormField(SignupPage.firstnameInput, 'Invalid input provided');
          */
-        validateFormField(inputField: Chainable<JQuery<HTMLElement>>, message: string): Cypress.Chainable<JQuery<HTMLElement>>;
+        validateFormField(
+            inputField: Chainable<JQuery<HTMLElement>>,
+            message: string
+        ): Cypress.Chainable<JQuery<HTMLElement>>;
     }
 }
-  
