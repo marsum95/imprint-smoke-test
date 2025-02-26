@@ -1,17 +1,17 @@
 import LoginPage from '../pages/LoginPage';
-import BasePage from '../pages/BasePage';
+// import BasePage from '../pages/BasePage';
 import UiVerificationPage from '../pages/UiVerificationPage';
-import TimelinePage from '../pages/Timeline';
+import TimelinePage from '../pages/TimelinePage';
 
 describe(
     'Post different content on TimelinePage flow',
     { tags: ['@Login', '@regression'] },
     () => {
-        let basePage;
+        // let basePage;
 
-        before(() => {
-            basePage = new BasePage();
-        });
+        // before(() => {
+        //     basePage = new BasePage();
+        // });
 
         //Mocha automatically shares contexts for us across all applicable hooks for each test.
         //Additionally these aliases and properties are automatically cleaned up after each test.
@@ -21,24 +21,28 @@ describe(
             //Using arrow functions to access aliases via this won't work because of the lexical binding of this.
 
             cy.fixture('users.json').as('users');
+            cy.get('@users').then((users) => {
+                LoginPage.loginWithUI(
+                    users.validUser.email,
+                    users.validUser.password
+                );
+            });
+            UiVerificationPage.verifyTimelineHeading();
         });
 
         it(
             'should login successfully and post a text Imprint',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
-                cy.wait(3000);
-                Timeline.clickOnTimeline.should('be.visible').click();
-                Timeline.textImprint();
-                Timeline.verifyImprint();
+                // LoginPage.loginWithUI(
+                //     this.users.validUser.email,
+                //     this.users.validUser.password
+                // );
+                // UiVerificationPage.verifyTimelineHeading();
+                //cy.wait(3000);
+                TimelinePage.verifyTimelineClick();
+                TimelinePage.textImprint();
+                TimelinePage.verifyImprint();
             }
         );
 
@@ -46,19 +50,16 @@ describe(
             'should login successfully and post a Media Imprint',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
+                // LoginPage.loginWithUI(
+                //     this.users.validUser.email,
+                //     this.users.validUser.password
+                // );
+
                 cy.wait(3000);
-                Timeline.clickOnTimeline.should('be.visible').click();
-                Timeline.clickonEditor.should('be.visible');
-                Timeline.mediaImprint();
-                Timeline.verifyImprint();
+                TimelinePage.clickOnTimelinePage.should('be.visible').click();
+                TimelinePage.clickonEditor.should('be.visible');
+                TimelinePage.mediaImprint();
+                TimelinePage.verifyImprint();
             }
         );
 
@@ -66,20 +67,12 @@ describe(
             'should login successfully and post a Article Imprint',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
                 cy.wait(3000);
-                Timeline.clickOnTimeline.should('be.visible').click();
+                TimelinePage.clickOnTimelinePage.should('be.visible').click();
 
-                //Timeline.clickonEditor.should('be.visible')
-                Timeline.articleImprint();
-                Timeline.verifyImprint();
+                //TimelinePage.clickonEditor.should('be.visible')
+                TimelinePage.articleImprint();
+                TimelinePage.verifyImprint();
             }
         );
 
@@ -87,22 +80,13 @@ describe(
             'should login successfully and click on 3 dot then post a CheckIn Imprint',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
-                cy.wait(3000);
-                Timeline.clickOnTimeline.should('be.visible').click();
-                Timeline.checkinImprint();
+                TimelinePage.clickOnTimelinePage.should('be.visible').click();
+                TimelinePage.checkinImprint();
 
                 // Set environment variable to indicate a check-in test is running
                 Cypress.env('CHECK_IN_TEST', true);
 
-                Timeline.verifyImprint();
+                TimelinePage.verifyImprint();
             }
         );
 
@@ -110,18 +94,9 @@ describe(
             'should login successfully and post a Verified Imprint',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
-                cy.wait(3000);
-                Timeline.clickOnTimeline.should('be.visible').click();
-                Timeline.checkVerifedImprint();
-                Timeline.verifyImprint();
+                TimelinePage.clickOnTimelinePage.should('be.visible').click();
+                TimelinePage.checkVerifedImprint();
+                TimelinePage.verifyImprint();
             }
         );
 
@@ -129,16 +104,7 @@ describe(
             'should login successfully and look for a Verified Imprint',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
-
-                Timeline.checkforVerifyTick
+                TimelinePage.checkforVerifyTick
                     .trigger('mouseover')
                     .should('have.css', 'color', 'rgb(16, 20, 24)');
             }
@@ -148,16 +114,7 @@ describe(
             'should login successfully and select one filter',
             { tags: '@smoke' },
             function () {
-                LoginPage.loginWithUI(
-                    this.users.validUser.email,
-                    this.users.validUser.password
-                );
-                UiVerificationPage.h2Heading.should(
-                    'contains.text',
-                    'Personal Tribe'
-                );
-
-                cy.get('.ant-menu-title-content').contains('Love').click();
+                TimelinePage.selectFilter();
                 // Check if the image has alt="Life" and the src includes the correct image URL
                 cy.get('img[alt="Love"]')
                     .should('have.attr', 'src') // Check the src attribute of the image

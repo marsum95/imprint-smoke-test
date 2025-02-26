@@ -1,15 +1,15 @@
 // import { ENTERTAINMENT } from "../config/routes";
 import UiVerificationPage from '../pages/UiVerificationPage';
-import BasePage from '../pages/BasePage';
+//import BasePage from '../pages/BasePage';
 import LoginPage from '../pages/LoginPage';
 import EntertainmentPage from '../pages/EntertainmentPage';
 
 describe('Entertainment flow', { tags: ['@Login', '@regression'] }, () => {
-    let basePage;
+    // let basePage;
 
-    before(() => {
-        basePage = new BasePage();
-    });
+    // before(() => {
+    //     basePage = new BasePage();
+    // });
 
     //Mocha automatically shares contexts for us across all applicable hooks for each test.
     //Additionally these aliases and properties are automatically cleaned up after each test.
@@ -25,7 +25,7 @@ describe('Entertainment flow', { tags: ['@Login', '@regression'] }, () => {
                 users.validUser.password
             );
         });
-        UiVerificationPage.h2Heading.should('contains.text', 'Personal Tribe');
+        UiVerificationPage.verifyTimelineHeading();
 
         EntertainmentPage.clickOnEntertainmentButton();
     });
@@ -60,7 +60,7 @@ describe('Entertainment flow', { tags: ['@Login', '@regression'] }, () => {
         }
     );
 
-    it.only(
+    it(
         'should login successfully and Play a Quiz',
         { tags: '@smoke' },
         function () {

@@ -1,5 +1,5 @@
 import BasePage from './BasePage';
-import { ENDPOINT_PREFIX } from '../config/constants';
+import { ENDPOINT_PREFIX } from '../config/Constants';
 import routes from '../config/routes';
 
 class SubscriptionPage extends BasePage {

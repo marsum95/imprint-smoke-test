@@ -1,20 +1,32 @@
-import BasePage from "./BasePage";
+import BasePage from './BasePage';
 const routes = require('../config/routes');
-import { ENDPOINT_PREFIX } from "../config/constants";
+import { ENDPOINT_PREFIX } from '../config/Constants';
 
-class ProductDetailsPage extends BasePage{
+class ProductDetailsPage extends BasePage {
+    get addToWishlistBtn() {
+        return cy.get('[data-original-title="Add to Wish List"]').first();
+    }
+    get addToCartBtn() {
+        return cy.get('#button-cart');
+    }
+    get alert() {
+        return cy.get('#product-product .alert');
+    }
 
-    get addToWishlistBtn() { return cy.get('[data-original-title="Add to Wish List"]').first(); }
-    get addToCartBtn() { return cy.get('#button-cart'); }
-    get alert() { return cy.get('#product-product .alert'); }
-
-    get productName() { return cy.get('#content h1'); }
-    get productPrice() { return cy.get('#content #product').prev('ul').find('h2'); }
-    get productDescription() { return cy.get('#content .intro'); }
-
+    get productName() {
+        return cy.get('#content h1');
+    }
+    get productPrice() {
+        return cy.get('#content #product').prev('ul').find('h2');
+    }
+    get productDescription() {
+        return cy.get('#content .intro');
+    }
 
     open(productID) {
-        return super.open(ENDPOINT_PREFIX + routes.PRODUCT_DETAILS_ENDPOINT + productID)
+        return super.open(
+            ENDPOINT_PREFIX + routes.PRODUCT_DETAILS_ENDPOINT + productID
+        );
     }
 
     addProductToCart() {
@@ -24,9 +36,6 @@ class ProductDetailsPage extends BasePage{
     addProductToWishlist() {
         this.addToWishlistBtn.click();
     }
-
 }
 
-
 export default new ProductDetailsPage();
-

@@ -1,14 +1,14 @@
-import UiVerificationPage from '../pages/UiVerificationPage';
-import BasePage from '../pages/BasePage';
+// import UiVerificationPage from '../pages/UiVerificationPage';
+// import BasePage from '../pages/BasePage';
 import LoginPage from '../pages/LoginPage';
 import TopMenuPage from '../pages/TopMenuPage';
 
 describe('Top Menu Verification', { tags: ['@Login', '@regression'] }, () => {
-    let basePage;
+    // let basePage;
 
-    before(() => {
-        basePage = new BasePage();
-    });
+    // before(() => {
+    //     basePage = new BasePage();
+    // });
 
     //Mocha automatically shares contexts for us across all applicable hooks for each test.
     //Additionally these aliases and properties are automatically cleaned up after each test.
@@ -18,17 +18,18 @@ describe('Top Menu Verification', { tags: ['@Login', '@regression'] }, () => {
         //Using arrow functions to access aliases via this won't work because of the lexical binding of this.
 
         cy.fixture('users.json').as('users');
+        cy.get('@users').then((users) => {
+            LoginPage.loginWithUI(
+                users.validUser.email,
+                users.validUser.password
+            );
+        });
     });
 
     it(
         'Login and Verify that there is content in top menu',
         { tags: '@smoke' },
         function () {
-            LoginPage.loginWithUI(
-                this.users.validUser.email,
-                this.users.validUser.password
-            );
-
             TopMenuPage.homeButton();
 
             TopMenuPage.newsButton();

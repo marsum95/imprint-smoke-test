@@ -4,6 +4,7 @@ import BasePage from '../pages/BasePage';
 import SigninPage from '../pages/SigninPage';
 
 import { faker } from '@faker-js/faker';
+import LoginPage from '../pages/LoginPage';
 
 describe('Login and Quiz Flow', { tags: ['@Login', '@regression'] }, () => {
     let basePage;
@@ -20,11 +21,11 @@ describe('Login and Quiz Flow', { tags: ['@Login', '@regression'] }, () => {
         cy.fixture('users.json').as('users');
 
         cy.get('@users').then((users) => {
-            SigninPage.loginWithUI(users.newUser.email, users.newUser.password);
+            LoginPage.loginWithUI(users.newUser.email, users.newUser.password);
         });
     });
 
-    it.only(
+    it(
         'should login successfully with valid credentials and complete signup flow',
         { tags: '@smoke' },
         function () {

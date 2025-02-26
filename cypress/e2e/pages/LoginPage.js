@@ -1,6 +1,6 @@
 import BasePage from './BasePage';
 const routes = require('../config/routes');
-import { ENDPOINT_PREFIX } from '../config/constants';
+import { ENDPOINT_PREFIX } from '../config/Constants';
 
 class LoginPage extends BasePage {
     get continueBtn() {
@@ -43,7 +43,7 @@ class LoginPage extends BasePage {
     }
 
     verifyAlert() {
-        this.alertMsg.should('contains.text', 'Login Error');
+        this.alertMsg.should('contains.text', 'Failed to login');
     }
 }
 

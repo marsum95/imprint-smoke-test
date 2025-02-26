@@ -1,6 +1,6 @@
 import BasePage from './BasePage';
 const routes = require('../config/routes');
-import { ENDPOINT_PREFIX } from '../config/constants';
+import { ENDPOINT_PREFIX } from '../config/Constants';
 
 class SigninPage extends BasePage {
     get loginInput() {
@@ -62,12 +62,12 @@ class SigninPage extends BasePage {
         //this.continueBtn.click();
     }
 
-    loginWithUI(email, password) {
-        this.open();
-        this.loginInput.type(email);
-        this.passwordInput.type(password);
-        this.loginBtn.click();
-    }
+    // loginWithUI(email, password) {
+    //     this.open();
+    //     this.loginInput.type(email);
+    //     this.passwordInput.type(password);
+    //     this.loginBtn.click();
+    // }
 
     userProfilePic() {
         this.uploadPic.selectFile('cypress/fixtures/Sofie.jpg', {

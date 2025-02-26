@@ -1,7 +1,7 @@
 import BasePage from './BasePage';
 import { validationMessages } from '../config/errorMessages';
 const routes = require('../config/routes');
-import { ENDPOINT_PREFIX } from '../config/constants';
+import { ENDPOINT_PREFIX } from '../config/Constants';
 
 import { el, faker } from '@faker-js/faker';
 
@@ -153,6 +153,7 @@ class SignupPage extends BasePage {
                 message: validationMessages.PRIVACY_POLICY,
                 fix: () => this.confirmPolicy(true),
             },
+            this.enterYear('1995').enterMonth('0').enterDay('20'),
         ]).each(({ field, message, fix }) => {
             this.submitRegistraion(); // Submit first to trigger next error
 

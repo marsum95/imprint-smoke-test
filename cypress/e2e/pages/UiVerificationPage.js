@@ -1,6 +1,6 @@
 import BasePage from './BasePage';
 const routes = require('../config/routes');
-import { ENDPOINT_PREFIX } from '../config/constants';
+import { ENDPOINT_PREFIX } from '../config/Constants';
 
 class UiVerificationPage extends BasePage {
     //refer to the elements in tests as UiVerificationPage.elements.h1Heading()
@@ -21,6 +21,9 @@ class UiVerificationPage extends BasePage {
     }
     get logout() {
         return cy.get('.ant-list-footer > div');
+    }
+    get verifyEmail() {
+        return cy.get('h1');
     }
     get timelineTitle() {
         return cy.get('.ant-space-item');
@@ -46,7 +49,7 @@ class UiVerificationPage extends BasePage {
     }
 
     verifyLogout() {
-        this.verifyLogout.should('contains.text', 'Log Out');
+        this.logout.should('contains.text', 'Log Out');
     }
 
     verifyTimelineHeading() {
@@ -76,6 +79,10 @@ class UiVerificationPage extends BasePage {
                     msg.includes('Email Already Exists')
             );
         });
+    }
+
+    verifyEmailPage() {
+        this.verifyEmail.should('have.text', 'Verify your Imprint Email');
     }
 }
 

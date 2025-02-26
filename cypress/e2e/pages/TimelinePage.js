@@ -1,5 +1,5 @@
 import BasePage from "./BasePage";
-import { ENDPOINT_PREFIX } from "../config/constants";
+import { ENDPOINT_PREFIX } from "../config/Constants";
 import routes from "../config/routes";
 
 class TimelinePage extends BasePage{
@@ -39,6 +39,9 @@ class TimelinePage extends BasePage{
         .find('.icon-check-green')
         .should('exist')
     }
+    get oneFilter() { return cy.get('.ant-menu-title-content')}
+
+    get getFilter() { return cy.get('img[alt="Love"]')}
     
     open() {
         //cy.visit('?route=account/login');   //Prefixes the baseUrl
@@ -156,6 +159,21 @@ class TimelinePage extends BasePage{
     }
     postValueBadge(){
         const
+    }
+
+    verifyTimelineClick(){
+        this.clickOnTimeline.should('be.visible').click();
+    }
+
+    selectFilter(){
+        this.oneFilter.contains('Love').click();
+    }
+
+    verifyfilter(){
+        // Check if the image has alt="Life" and the src includes the correct image URL
+        this.getFilter
+        .should('have.attr', 'src') // Check the src attribute of the image
+        .and('include', 'value-love'); // Ensure that the src includes "value-life"
     }
 
 }

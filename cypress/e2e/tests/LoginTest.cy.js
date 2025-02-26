@@ -19,14 +19,14 @@ describe(
             //Note the use of the standard function syntax.
             //Using arrow functions to access aliases via this won't work because of the lexical binding of this.
 
-            // cy.fixture('users.json').as('users');
-            cy.login(); //login via custom command
+            cy.fixture('users.json').as('users');
         });
 
         it(
             'should login successfully with valid credentials',
             { tags: '@smoke' },
             function () {
+                cy.login();
                 UiVerificationPage.verifyTimelineHeading();
             }
         );
@@ -45,8 +45,7 @@ describe(
         );
 
         it('should perform login and logout', function () {
-            // cy.login(); //login via custom command
-
+            cy.login(); //login via custom command
             basePage.header.performLogout();
             UiVerificationPage.verifyLogout();
         });
@@ -108,7 +107,7 @@ describe(
         });
 
         it.skip(
-            'Should open side menu and validate enabled and disabled options',
+            'validate enabled and disabled options',
             { tags: '@smoke' },
             function () {
                 LoginPage.loginWithUI(

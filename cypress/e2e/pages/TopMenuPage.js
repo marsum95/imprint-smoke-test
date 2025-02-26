@@ -2,7 +2,7 @@ import BasePage from './BasePage';
 const routes = require('../config/routes');
 import UiVerificationPage from '../pages/UiVerificationPage';
 import EntertainmentPage from './EntertainmentPage';
-import { ENDPOINT_PREFIX } from '../config/constants';
+import { ENDPOINT_PREFIX } from '../config/Constants';
 
 class TopMenuPage extends BasePage {
     get home() {

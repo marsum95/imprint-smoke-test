@@ -1,5 +1,5 @@
 import LoginPage from '../pages/LoginPage';
-import BasePage from '../pages/BasePage';
+// import BasePage from '../pages/BasePage';
 import UiVerificationPage from '../pages/UiVerificationPage';
 import SubscriptionPage from '../pages/SubscriptionPage';
 
@@ -7,12 +7,6 @@ describe(
     'Login as New user and Buy Subscription',
     { tags: ['@Login', '@regression'] },
     () => {
-        let basePage;
-
-        before(() => {
-            basePage = new BasePage();
-        });
-
         //Mocha automatically shares contexts for us across all applicable hooks for each test.
         //Additionally these aliases and properties are automatically cleaned up after each test.
         beforeEach(() => {
@@ -24,7 +18,7 @@ describe(
         });
 
         it(
-            'should login successfully and go to subscription page',
+            'should login and go to subscription page',
             { tags: '@smoke' },
             function () {
                 LoginPage.loginWithUI(
